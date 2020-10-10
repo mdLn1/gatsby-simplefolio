@@ -28,7 +28,46 @@ const Projects = () => {
         <div className="project-wrapper">
           <Title title="Projects" />
           {projects.map((project) => {
-            const { title, info, info2, url, repo, img, id, technologies } = project;
+            const {
+              title,
+              info,
+              info2,
+              url,
+              repo,
+              img,
+              id,
+              technologies,
+              screenCompatibility,
+            } = project;
+            let compatibilityMessage = '';
+            if (screenCompatibility) {
+              switch (screenCompatibility) {
+                case 1:
+                  compatibilityMessage = 'Desktop ONLY!';
+                  break;
+                case 2:
+                  compatibilityMessage = 'Tablet ONLY!';
+                  break;
+                case 3:
+                  compatibilityMessage = 'Desktop and Tablet';
+                  break;
+                case 4:
+                  compatibilityMessage = 'Phone ONLY!';
+                  break;
+                case 5:
+                  compatibilityMessage = 'Phone and Desktop';
+                  break;
+                case 6:
+                  compatibilityMessage = 'Phone and Tablet';
+                  break;
+                case 7:
+                  compatibilityMessage = 'Any screen size';
+                  break;
+                default:
+                  break;
+              }
+            }
+
             return (
               <Row key={id}>
                 <Col lg={4} sm={12}>
@@ -41,6 +80,12 @@ const Projects = () => {
                   >
                     <div className="project-wrapper__text">
                       <h3 className="project-wrapper__text-title">{title || 'Project Title'}</h3>
+                      {screenCompatibility && (
+                        <p className="mb-4">
+                          <b>Screen Compatibility: </b>
+                          {compatibilityMessage}
+                        </p>
+                      )}
                       <div>
                         <p>
                           {info ||
